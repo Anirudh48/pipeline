@@ -27,9 +27,9 @@ stages {
 						if [[ -x "./ABC.exe" ]]; then  
 							echo -e "\nSTEP 4:	Build Successful"
 							echo "       	BUILD_FILE: $(pwd)/ABC.exe"
-							[[ -d "/opt/jenkins/mavendocker/Build/" ]] || mkdir --parents '/opt/jenkins/mavendocker/Build/'
-							cd /opt/jenkins/mavendocker/Build/
-							[[ -d "/opt/jenkins/mavendocker/Build/artifactory" ]] && rm -rf /opt/jenkins/mavendocker/Build/artifactory 
+							echo " -------------------------------- $(pwd)" 
+							cd /opt/jenkins/workspace/Build/
+							[[ -d "/opt/jenkins/workspace/Build/artifactory" ]] && rm -rf /opt/jenkins/workspace/Build/artifactory 
 							git clone git@github.com:Anirudh48/artifactory.git
 							cd artifactory
 							file=$(ls ABC_* | sort -n | tail -1)
@@ -42,7 +42,7 @@ stages {
 							fi    
 							echo -e "\nLAST_BUILD: $file \nOLD_BUILD_VERSION: $old_version \nNEW_BUILD_VERSION: $new_version"
 							
-							cp "/opt/jenkins/mavendocker/Build/c_programs/ABC.exe" "/opt/jenkins/mavendocker/Build/artifactory/ABC_v${new_version}.exe"
+							cp "/opt/jenkins/workspace/Build/c_programs/ABC.exe" "/opt/jenkins/workspace/Build/artifactory/ABC_v${new_version}.exe"
 							
 							git config --global push.default simple
 							git config --global user.name "Jenkins"
