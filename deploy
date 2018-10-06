@@ -1,0 +1,24 @@
+#!/bin/bash
+set +x
+
+	[[ -d "./artifactory" ]] && rm -rf ./artifactory 
+	git clone git@github.com:Anirudh48/artifactory.git
+    cd artifactory
+    file=$(ls ABC_* | sort -n | tail -1) 
+
+echo -e "\n\n**************************** This is a Deploy JOB $file **************************** "
+
+echo -e "\nSTEP 1: Deploying $file with default input........"
+./$file -v -i <<<"5 400 500 600"
+
+if [ $? -eq 0 ]; then
+  if [[ -x "./$file" ]]; then  
+      echo -e "\nSTEP 2:	Deployment Successful - Build pushed to artifactory"
+      echo "       	ARTIFACTORY_PATH: /home/ec2-user/builds/$file"
+  fi
+else  
+      echo -e "**************** ERROR *********************\n"
+      echo "Deployment failure - ABC.exe cannot be executed "
+      echo -e "********************************************\n"
+      exit 1
+fi

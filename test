@@ -1,0 +1,31 @@
+#!/bin/bash
+set +x
+
+	[[ -d "./artifactory" ]] && rm -rf ./artifactory 
+	git clone git@github.com:Anirudh48/artifactory.git
+    cd artifactory
+    file=$(ls ABC_* | sort -n | tail -1)
+    
+echo -e "\n\n**************************** This is a Deploy JOB for $file**************************** "
+count=1
+
+for i in {1..10}
+do
+    oe=$((1000 + RANDOM % 10000))
+    fact=$((1 + RANDOM % 15))
+    num1=$((1 + RANDOM % 100))
+    num2=$((1 + RANDOM % 1000))
+    
+		echo -e "\n-------------------------- TEST_CASE ($count) --------------------------"
+		./$file -v -i <<<"$fact $oe $num1 $num2"
+    
+    if [ $? -eq 0 ]; then
+        echo -e "\n      RESULT -> TEST_CASE (${count}): SUCCESS" 
+    else  
+        echo -e "\n      RESULT -> TEST_CASE (${count}): FAILED"
+        exit 1
+    fi
+
+	echo "-------------------------------------------------------------------"
+	((count++))
+done
