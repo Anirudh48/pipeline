@@ -27,6 +27,7 @@ stages {
 						if [[ -x "./ABC.exe" ]]; then  
 							echo -e "\nSTEP 4:	Build Successful"
 							echo "       	BUILD_FILE: $(pwd)/ABC.exe"
+							[[ -d "/opt/jenkins/mavendocker/Build/" ]] || mkdir --parents '/opt/jenkins/mavendocker/Build/'
 							cd /opt/jenkins/mavendocker/Build/
 							[[ -d "/opt/jenkins/mavendocker/Build/artifactory" ]] && rm -rf /opt/jenkins/mavendocker/Build/artifactory 
 							git clone git@github.com:Anirudh48/artifactory.git
