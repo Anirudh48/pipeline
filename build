@@ -21,6 +21,7 @@ set +x
 						if [[ -x "./ABC.exe" ]]; then  
 							echo -e "\nSTEP 4:	Build Successful"
 							echo "       	BUILD_FILE: $(pwd)/ABC.exe"
+							[[ -d '/opt/jenkins/workspace/Build' ]] || mkdir --parents '/opt/jenkins/workspace/Build'
 							cd /opt/jenkins/workspace/Build/
 							[[ -d "/opt/jenkins/workspace/Build/artifactory" ]] && rm -rf /opt/jenkins/workspace/Build/artifactory 
 							git clone git@github.com:Anirudh48/artifactory.git
