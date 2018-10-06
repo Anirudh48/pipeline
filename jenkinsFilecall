@@ -11,7 +11,7 @@ stages {
         stage('deploy') {
             steps {
                 echo 'Deploying to TEST environment..'
-				sh 'sudo -s; ./deploy'
+				sh 'ls -lrt; ./deploy'
             }
         }
         stage('test') {
