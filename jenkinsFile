@@ -4,7 +4,7 @@ stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-				sh """
+				sh '''
 						set +x
 						cd c_programs
 						echo -e "\n\n**************************** This is a Build JOB **************************** "
@@ -59,14 +59,14 @@ stages {
 						fi    
 
 						echo -e "\n************************************************************************** "
-				"""
+				'''
 				
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-				sh """
+				sh '''
 					set +x
 
 					[[ -d "./artifactory" ]] && rm -rf ./artifactory 
@@ -90,13 +90,13 @@ stages {
 					  echo -e "********************************************\n"
 					  exit 1
 				fi
-				"""
+				'''
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-				sh """
+				sh '''
 				set +x
 
 					[[ -d "./artifactory" ]] && rm -rf ./artifactory 
@@ -127,7 +127,7 @@ stages {
 					echo "-------------------------------------------------------------------"
 					((count++))
 				done
-				"""
+				'''
             }
         }
     }
