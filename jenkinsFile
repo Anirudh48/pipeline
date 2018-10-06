@@ -64,9 +64,9 @@ stages {
 				
             }
         }
-        stage('Test') {
+        stage('deploy') {
             steps {
-                echo 'Testing..'
+                echo 'Deploying to TEST environment..'
 				sh '''
 					set +x
 
@@ -94,9 +94,9 @@ stages {
 				'''
             }
         }
-        stage('Deploy') {
+        stage('test') {
             steps {
-                echo 'Deploying....'
+                echo 'Testing....'
 				sh '''
 				set +x
 
