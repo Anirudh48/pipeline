@@ -4,20 +4,20 @@ stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-				sh 'sudo bash ./build'
+				sh 'sudo -s; ./build'
 				
             }
         }
         stage('deploy') {
             steps {
                 echo 'Deploying to TEST environment..'
-				sh 'sudo bash ./deploy'
+				sh 'sudo -s; ./deploy'
             }
         }
         stage('test') {
             steps {
                 echo 'Testing....'
-				sh 'sudo bash ./test'
+				sh 'sudo -s; ./test'
 					}
 				}
     }
