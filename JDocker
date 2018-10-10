@@ -15,8 +15,6 @@ pipeline {
             }
             steps {
                 sh '''
-					service jenkins start
-					service jenkins start
 					head -5  /var/lib/jenkins/config.xml| grep -oP '(?<=<version>).*?(?=</version>)'
 				   '''	
 			}
