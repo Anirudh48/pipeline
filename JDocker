@@ -3,18 +3,18 @@ pipeline {
     stages {
         stage('Back-end') {
             agent {
-                docker { image 'maven:latest' }
+                docker { image 'ubuntu:latest' }
             }
             steps {
-                sh 'mvn --version'
+                sh 'uname'
             }
         }
         stage('Front-end') {
             agent {
-                docker { image 'ubuntu:latest' }
+                docker { image 'jenkins:latest' }
             }
             steps {
-                sh 'node --version'
+                sh 'jenkins --version'
             }
         }
     }
