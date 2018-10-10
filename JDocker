@@ -14,8 +14,12 @@ pipeline {
                 docker { image 'jenkins:latest' }
             }
             steps {
-                sh 'jenkins --version'
-            }
+                sh '''
+					sudo service jenkins start
+					sudo service jenkins start
+					head -5  /var/lib/jenkins/config.xml| grep -oP '(?<=<version>).*?(?=</version>)'
+				   '''	
+			}
         }
     }
 }
