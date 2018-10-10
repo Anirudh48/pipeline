@@ -11,12 +11,10 @@ pipeline {
         }
         stage('Front-end') {
             agent {
-                docker { image 'jenkins:latest' }
+                docker { image 'maven:latest' }
             }
             steps {
-                sh '''
-					head -5  /var/lib/jenkins/config.xml| grep -oP '(?<=<version>).*?(?=</version>)'
-				   '''	
+                sh 'mvn --version'	
 			}
         }
     }
