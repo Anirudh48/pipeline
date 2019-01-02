@@ -6,6 +6,7 @@ stages {
                 echo 'Building..'
 				sh '''
 						set +x
+						sudo su -
 						cd c_programs
 						echo -e "\n\n**************************** This is a Build JOB **************************** "
 
@@ -44,7 +45,7 @@ stages {
                 echo 'Deploying to TEST environment..'
 				sh '''
 					set +x
-					
+					sudo su -
 					file="$(pwd)/c_programs/ABC.exe"
 					[[ -f "$file" ]] && sudo rm -f "$file"
 					pwd; sudo chmod 777 build; ./build
@@ -79,6 +80,7 @@ stages {
                 echo 'Testing....'
 				sh '''
 				set +x
+				sudo su -
 					file="$(pwd)/c_programs/ABC.exe"
 					[[ -f "$file" ]] && sudo rm -f "$file"
 					pwd; sudo chmod 777 build; ./build
