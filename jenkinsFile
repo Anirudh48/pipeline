@@ -44,11 +44,12 @@ stages {
                 echo 'Deploying to TEST environment..'
 				sh '''
 					set +x
+					
+					file="$(pwd)/c_programs/ABC.exe"
+					[[ -f "$file" ]] && sudo rm -f "$file"
 					pwd; sudo chmod 777 build; ./build
-					 echo "$(pwd)"
-					file=$(ls ABC* | sort -n | tail -1) 
-
-				echo -e "\n\n**************************** This is a Deploy JOB $file  $(pwd)**************************** "
+					
+				echo -e "\n\n**************************** This is a Deploy JOB $file **************************** "
 
 				echo -e "\nSTEP 1: Deploying $file with default input........"
 				./$file -v -i <<<"5 400 500 600"
@@ -72,9 +73,9 @@ stages {
                 echo 'Testing....'
 				sh '''
 				set +x
-
+					file="$(pwd)/c_programs/ABC.exe"
+					[[ -f "$file" ]] && sudo rm -f "$file"
 					pwd; sudo chmod 777 build; ./build
-					file=$(ls ABC_* | sort -n | tail -1)
 					
 				echo -e "\n\n**************************** This is a Deploy JOB for $file**************************** "
 				count=1
