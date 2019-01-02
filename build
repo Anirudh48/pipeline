@@ -1,7 +1,6 @@
 #!/bin/bash
 
 						set +x
-						sudo su -
 						cd c_programs
 						echo -e "\n\n**************************** This is a Build JOB **************************** "
 
