@@ -52,10 +52,10 @@ stages {
 				echo -e "\n\n**************************** This is a Deploy JOB $file **************************** "
 				if [[ -f "$file" ]]; then 
 				echo -e "\nSTEP 1: Deploying $file with default input........"
-				./$file -v -i <<<"5 400 500 600"
+				$file -v -i <<<"5 400 500 600"
 
 				if [ $? -eq 0 ]; then
-				  if [[ -x "./$file" ]]; then  
+				  if [[ -x "$file" ]]; then  
 					  echo -e "\nSTEP 2:	Deployment Successful - Build pushed to artifactory"
 					  echo "       	ARTIFACTORY_PATH: /home/ec2-user/builds/$file"
 				  fi
@@ -95,7 +95,7 @@ stages {
 					num2=$((1 + RANDOM % 1000))
 					
 						echo -e "\n-------------------------- TEST_CASE ($count) --------------------------"
-						./$file -v -i <<<"$fact $oe $num1 $num2"
+						$file -v -i <<<"$fact $oe $num1 $num2"
 					
 					if [ $? -eq 0 ]; then
 						echo -e "\n      RESULT -> TEST_CASE (${count}): SUCCESS" 
