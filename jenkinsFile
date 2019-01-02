@@ -28,8 +28,6 @@ stages {
 							echo -e "\nSTEP 4:	Build Successful"
 							echo "       	BUILD_FILE: $(pwd)/ABC.exe"
 							echo " -------------------------------- $(pwd)" 
-							sudo su -
-							cd ..
 							[[ -d '/opt/jenkins/workspace/Build' ]] || mkdir --parents '/opt/jenkins/workspace/Build'
 							cd /opt/jenkins/workspace/Build/
 							[[ -d "/opt/jenkins/workspace/Build/artifactory" ]] && rm -rf /opt/jenkins/workspace/Build/artifactory 
