@@ -45,9 +45,10 @@ stages {
 				sh '''
 					set +x
 					pwd; sudo chmod 777 build; ./build
+					 echo "$(pwd)"
 					file=$(ls ABC* | sort -n | tail -1) 
 
-				echo -e "\n\n**************************** This is a Deploy JOB $file **************************** "
+				echo -e "\n\n**************************** This is a Deploy JOB $file  $(pwd)**************************** "
 
 				echo -e "\nSTEP 1: Deploying $file with default input........"
 				./$file -v -i <<<"5 400 500 600"
