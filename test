@@ -2,7 +2,7 @@
 set +x
 
     pwd; sudo chmod 777 build; ./build
-    file=$(ls ABC_* | sort -n | tail -1)
+    file=$(ls ABC* | sort -n | tail -1)
     
 echo -e "\n\n**************************** This is a Deploy JOB for $file**************************** "
 count=1
