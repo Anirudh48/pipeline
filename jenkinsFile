@@ -26,33 +26,7 @@ stages {
 
 						if [[ -x "./ABC.exe" ]]; then  
 							echo -e "\nSTEP 4:	Build Successful"
-							echo "       	BUILD_FILE: $(pwd)/ABC.exe"
-							echo " -------------------------------- $(pwd)" 
-							[[ -d '/opt/jenkins/workspace/Build' ]] || mkdir --parents '/opt/jenkins/workspace/Build'
-							cd /opt/jenkins/workspace/Build/
-							[[ -d "/opt/jenkins/workspace/Build/artifactory" ]] && rm -rf /opt/jenkins/workspace/Build/artifactory 
-							git clone git@github.com:Anirudh48/artifactory.git
-							cd artifactory
-							file=$(ls ABC_* | sort -n | tail -1)
-							if [[ -n "$file" ]]; then
-								filename="${file%.*}"
-								old_version=$(echo $filename | awk -F 'v' '{print $2}')
-								new_version=$(echo "$old_version + 0.1" | bc)
-							else 
-								file='NA'; old_version='0.0'; new_version='1.0'
-							fi    
-							echo -e "\nLAST_BUILD: $file \nOLD_BUILD_VERSION: $old_version \nNEW_BUILD_VERSION: $new_version"
-							
-							cp "/opt/jenkins/workspace/Build/c_programs/ABC.exe" "/opt/jenkins/workspace/Build/artifactory/ABC_v${new_version}.exe"
-							
-							git config --global push.default simple
-							git config --global user.name "Jenkins"
-							git config --global user.email master.jenkins@build.com
-							git status
-							git add --all && git commit -m "Build ABC_${dt}.exe"
-							git push origin master
-							echo -e "\nSTEP 3:	Build pushed to artifactory"
-								
+							echo "       	BUILD_FILE: $(pwd)/ABC.exe"	
 						else
 							echo -e "**************** ERROR *********************\n"
 							echo "Build failure - No executable file generated"
@@ -70,11 +44,8 @@ stages {
                 echo 'Deploying to TEST environment..'
 				sh '''
 					set +x
-
-					[[ -d "./artifactory" ]] && rm -rf ./artifactory 
-					git clone git@github.com:Anirudh48/artifactory.git
-					cd artifactory
-					file=$(ls ABC_* | sort -n | tail -1) 
+					pwd; sudo chmod 777 build; ./build
+					file=$(ls ABC* | sort -n | tail -1) 
 
 				echo -e "\n\n**************************** This is a Deploy JOB $file **************************** "
 
@@ -101,9 +72,7 @@ stages {
 				sh '''
 				set +x
 
-					[[ -d "./artifactory" ]] && rm -rf ./artifactory 
-					git clone git@github.com:Anirudh48/artifactory.git
-					cd artifactory
+					pwd; sudo chmod 777 build; ./build
 					file=$(ls ABC_* | sort -n | tail -1)
 					
 				echo -e "\n\n**************************** This is a Deploy JOB for $file**************************** "
