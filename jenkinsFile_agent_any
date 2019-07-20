@@ -4,20 +4,20 @@ stages {
         stage('Build_check') {
             steps {
                 echo 'Building..'
-				sh 'pwd; sudo chmod 777 build deploy test; ./build'
+				sh 'pwd;  chmod 777 build deploy test; ./build'
 				
             }
         }
         stage('deploy') {
             steps {
                 echo 'Deploying to TEST environment..'
-				sh 'sudo chmod 777 build deploy test; ./deploy'
+				sh ' chmod 777 build deploy test; ./deploy'
             }
         }
         stage('test') {
             steps {
                 echo 'Testing....'
-				sh 'sudo chmod 777 build deploy test; ./test'
+				sh ' chmod 777 build deploy test; ./test'
 					}
 				}
     }
