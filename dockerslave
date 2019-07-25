@@ -1,8 +1,28 @@
 pipeline {
-    agent { label 'php' }
-    stages {
-        stage("Build") {
-             sh 'touch test_pipeline'		
+agent {
+        label 'slave'
+    }
+stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+                                sh 'sudo chmod 777 build deploy test; ./build'
+
+            }
         }
+        stage('deploy') {
+            steps {
+                echo 'Deploying to TEST environment..'
+                                sh 'sudo chmod 777 build deploy test; ./deploy'
+            }
+        }
+        stage('test') {
+            steps {
+                echo 'Testing....'
+                                sh 'sudo chmod 777 build deploy test; ./test'
+                                        }
+                                }
     }
 }
+
+
